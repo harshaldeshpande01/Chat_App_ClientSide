@@ -9,6 +9,13 @@ const New = () => {
     const [pass, setPass] = useState('');
     const create = true;
 
+    function handleSubmit(e) {
+      if(!name || !room || !pass)  {
+        e.preventDefault()
+        alert('All field are required!')
+      }
+    }
+
     return (
       <>
        <div className="navbar-fixed">
@@ -31,7 +38,7 @@ const New = () => {
       <div className="joinInnerContainer">
       <p style={{fontFamily: "monospace"}} className="heading brand-logo "><span role="img" aria-label="emoji">💬</span>CREATE</p>
         <p className="head">
-          <Link style={{color: "white"}} to="/"> Back to Join ?</Link>
+          <Link style={{color: "white"}} to="/"> Back to Join </Link>
         </p>
         <div>
           <input placeholder="Username" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} />
@@ -42,8 +49,8 @@ const New = () => {
         <div>
           <input placeholder="Set password" className="joinInput mt-20" type="text" onChange={(event) => setPass(event.target.value)} />
         </div>
-        <Link to={`/chat?create=${create}&name=${name}&room=${room}&pass=${pass}`}>
-          <button className={'button mt-20'} type="submit">Sign In</button>
+        <Link onClick={handleSubmit} to={`/chat?create=${create}&name=${name}&room=${room}&pass=${pass}`}>
+          <button className={'button mt-20 pointer'} type="submit">Sign In</button>
         </Link>
       </div>
     </div>

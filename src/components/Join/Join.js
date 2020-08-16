@@ -9,6 +9,13 @@ const Join = () => {
     const [pass, setPass] = useState('');
     const create = false;
 
+    function handleSubmit(e) {
+      if(!name || !room || !pass)  {
+        e.preventDefault()
+        alert('All field are required!')
+      }
+    }
+
     return (
       <>
       <div className="navbar-fixed">
@@ -31,7 +38,7 @@ const Join = () => {
       <div className="joinInnerContainer">
         <p style={{fontFamily: "monospace"}} className="heading brand-logo "><span role="img" aria-label="emoji">💬</span>JOIN</p>
         <p className="head">
-          <Link style={{color: "white"}} to="/new"> Or create new room?</Link>
+          <Link style={{color: "white"}} to="/new"> Or create new room</Link>
         </p>
         <div>
           <input placeholder="Username" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} />
@@ -42,8 +49,8 @@ const Join = () => {
         <div>
           <input placeholder="Room password" className="joinInput mt-20" type="text" onChange={(event) => setPass(event.target.value)} />
         </div>
-        <Link onClick={e => (!name || !room || !pass) ? e.preventDefault() : null} to={`/chat?create=${create}&name=${name}&room=${room}&pass=${pass}`}>
-          <button className={'button mt-20'} type="submit">Sign In</button>
+        <Link onClick={handleSubmit} to={`/chat?create=${create}&name=${name}&room=${room}&pass=${pass}`}>
+          <button className={'button mt-20 pointer'} type="submit">Sign In</button>
         </Link>
       </div>
     </div>
@@ -52,3 +59,5 @@ const Join = () => {
 };
 
 export default Join;
+
+// e => (!name || !room || !pass) ? e.preventDefault() : null
